@@ -1,8 +1,9 @@
-fn next_two(x: int) -> (int, int) { 
-  (x + 1i, x + 2i) 
+struct Point {
+  x : int,
+  y : int,
 }
 
 fn main() {
-    let (x, y) = next_two(5i);
-    println!("The numbers after 5 are: {}, {}", x, y);
+    let point1 = Point {x : 3, y : 2};
+    println!("Point1 is at {}, {}", point1.x, point1.y);
 }
