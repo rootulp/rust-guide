@@ -1,5 +1,5 @@
 fn main() {
-  let x : int;
-
-  println!("Hello World!");
+  let x = 5i;
+  let y = if x == 5i { 10i } else { 15i };
+  println!("value of y is {}", y)
 }
