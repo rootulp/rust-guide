@@ -1,9 +1,12 @@
-struct Point {
-  x : int,
-  y : int,
-}
+use std::io;
 
 fn main() {
-    let point1 = Point {x : 3, y : 2};
-    println!("Point1 is at {}, {}", point1.x, point1.y);
+    println!("What's your name?");
+
+    let input = io::stdin()
+                        .read_line()
+                        .ok()
+                        .expect("Failed to read line");
+
+    println!("Hello, {}", input);
 }
