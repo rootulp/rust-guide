@@ -5,7 +5,7 @@ use std::io;
 // Print the menu followed by the prompt
 fn print_both(menu: [&str, ..4], prompt: &str) {
 
-    // Iterate through array and print index then period then menu item
+    // Iterate through array and print index, period, menu item
     for i in range(0, 4u) { // Hard coded number 4 here
         println!("{}. {}", i, menu[i]);
     }
@@ -41,20 +41,30 @@ fn next_input() -> int {
 // Got a 'missing lifetime specifier' error when trying to return &str
 fn select(menu: [&str, ..4], prompt: &str) -> String {
 
-    // Loop until user inputs a valid number
+    // Check if menu is empty
+    if menu.len() == 0 {
+        return "".to_string()
+    }
+
+    // Loop until user inputs a valid menu index
     loop {
+
         print_both(menu, prompt);
+
         let menu_index: int = next_input();
+
         match menu_index{
             0...3 => return menu[menu_index as uint].to_string(),
             _=> print_both(menu, prompt),
         }
     }
-    return "No Solution".to_string();
 }
 
+#[cfg(not(test))]
 fn main() {
     let items = ["fee fie", "huff and puff", "mirror mirror", "tick tock"];
     let prompt = "Choose one.";
     println!("{}", select(items, prompt));
 }
+
+// Need to add tests but having trouble simulating std io
