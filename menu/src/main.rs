@@ -1,6 +1,7 @@
 // Implements http://rosettacode.org/wiki/Menu
 
 use std::io;
+use std::str;
 
 // Print the menu followed by the prompt
 fn print_both(menu: &[&str], prompt: &str) {
@@ -12,31 +13,24 @@ fn print_both(menu: &[&str], prompt: &str) {
 
     // Print the prompt
     println!("{}", prompt);
-
 }
+
 
 // Grab the next line of input
-fn next_input() -> int {
+fn next_input() -> Option<uint> {
 
     // Convert it to a possible int
-    let mut stdin = io::stdin();
-    let line = stdin.read_line().unwrap();
-    let trimmed: &str = line.trim();
-    let possible: Option<int> = from_str(trimmed);
+    // let mut stdin = io::stdin();
+    // let line = stdin.read_line().unwrap();
+    // let trimmed = line.trim();
+    let input = io::stdin().read_line()
+                           .ok()
+                           .expect("Failed to read line");
+    let user_input: Option<uint> = input.trim().parse();
 
-    // If possible num is between 0 and 3, return it. 
-    // Otherwise return -1 <= I don't think this is good practice
-    match possible {
-        None => return -1,
-        Some(possible) => match possible {
-            0...3 => return possible,
-            _=> return -1
-        }
-    }
+    return user_input;
 }
 
-// Couldn't figure out how to make select return an element of menu
-// Got a 'missing lifetime specifier' error when trying to return &str
 fn select<'a>(menu: &'a [&str], prompt: &str) -> &'a str {
     // Check if menu is empty
     if menu.len() == 0 {
@@ -48,10 +42,15 @@ fn select<'a>(menu: &'a [&str], prompt: &str) -> &'a str {
 
         print_both(menu, prompt);
 
-        let menu_index: int = next_input();
+        let user_input = next_input();
+
+        let menu_index = match user_input {
+            Some(menu_index) => menu_index,
+            None      => continue
+        };
 
         if let 0...3 = menu_index {
-            return menu[menu_index as uint];
+            return menu[menu_index];
         }
     }
 }
