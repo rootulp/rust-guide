@@ -3,7 +3,7 @@
 use std::io;
 
 // Print the menu followed by the prompt
-fn print_both(menu: [&str, ..4], prompt: &str) {
+fn print_both(menu: &[&str], prompt: &str) {
 
     // Iterate through array and print index, period, and menu item
     for (i, item) in menu.iter().enumerate() {
@@ -37,7 +37,7 @@ fn next_input() -> int {
 
 // Couldn't figure out how to make select return an element of menu
 // Got a 'missing lifetime specifier' error when trying to return &str
-fn select(menu: [&str, ..4], prompt: &str) -> String {
+fn select(menu: &[&str], prompt: &str) -> String {
 
     // Check if menu is empty
     if menu.len() == 0 {
@@ -59,9 +59,10 @@ fn select(menu: [&str, ..4], prompt: &str) -> String {
 
 #[cfg(not(test))]
 fn main() {
-    let items = ["fee fie", "huff and puff", "mirror mirror", "tick tock"];
     let prompt = "Choose one.";
-    println!("{}", select(items, prompt));
+    let items = ["fee fie", "huff and puff", "mirror mirror", "tick tock"];
+    let menu = items.slice(0,4);
+    println!("{}", select(menu, prompt));
 }
 
 // Need to add tests but having trouble simulating std io
