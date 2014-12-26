@@ -5,9 +5,9 @@ use std::io;
 // Print the menu followed by the prompt
 fn print_both(menu: [&str, ..4], prompt: &str) {
 
-    // Iterate through array and print index, period, menu item
-    for i in range(0, 4u) { // Hard coded number 4 here
-        println!("{}. {}", i, menu[i]);
+    // Iterate through array and print index, period, and menu item
+    for (i, item) in menu.iter().enumerate() {
+        println!("{}. {}", i, item);
     }
 
     // Print the prompt
@@ -34,7 +34,6 @@ fn next_input() -> int {
             _=> return -1
         }
     }
-
 }
 
 // Couldn't figure out how to make select return an element of menu
