@@ -51,9 +51,8 @@ fn select(menu: [&str, ..4], prompt: &str) -> String {
 
         let menu_index: int = next_input();
 
-        match menu_index{
-            0...3 => return menu[menu_index as uint].to_string(),
-            _=> print_both(menu, prompt),
+        if let 0...3 = menu_index {
+            return menu[menu_index as uint].to_string();
         }
     }
 }
