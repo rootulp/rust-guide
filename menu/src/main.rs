@@ -20,9 +20,8 @@ fn next_input() -> int {
 
     // Convert it to a possible int
     let mut stdin = io::stdin();
-    let line: io::IoResult<String> = stdin.read_line();
-    let string: String = line.unwrap();
-    let trimmed: &str = string.as_slice().trim();
+    let line = stdin.read_line().unwrap();
+    let trimmed: &str = line.trim();
     let possible: Option<int> = from_str(trimmed);
 
     // If possible num is between 0 and 3, return it. 
