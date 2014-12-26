@@ -37,11 +37,10 @@ fn next_input() -> int {
 
 // Couldn't figure out how to make select return an element of menu
 // Got a 'missing lifetime specifier' error when trying to return &str
-fn select(menu: &[&str], prompt: &str) -> String {
-
+fn select<'a>(menu: &'a [&str], prompt: &str) -> &'a str {
     // Check if menu is empty
     if menu.len() == 0 {
-        return "".to_string()
+        return "";
     }
 
     // Loop until user inputs a valid menu index
@@ -52,7 +51,7 @@ fn select(menu: &[&str], prompt: &str) -> String {
         let menu_index: int = next_input();
 
         if let 0...3 = menu_index {
-            return menu[menu_index as uint].to_string();
+            return menu[menu_index as uint];
         }
     }
 }
