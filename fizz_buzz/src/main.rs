@@ -2,13 +2,13 @@ fn main() {
     let mut i :uint = 1;
     while i <= 100 {
         if i % 15 == 0 {
-            println!("CracklePop");
+            println!("FizzBuzz");
         }
         else if i % 5 == 0 {
-            println!("Pop");
+            println!("Buzz");
         }
         else if i % 3 == 0 {
-            println!("Crackle");
+            println!("Fizz");
         }
         else {
             println!("{}", i.to_string());
